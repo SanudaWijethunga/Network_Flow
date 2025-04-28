@@ -6,8 +6,12 @@ public class Main {
         String fileName = getFIleName(input);
         System.out.println();
         System.out.println("File path : " + fileName);
-        //call the method to process the data
-        FileInputReader.processFileData(fileName);
+
+        NetworkGraph networkGraph = FileInputReader.processFileData(fileName);
+        FordFulkerson fordFulkerson = new FordFulkerson(networkGraph);
+
+        //display the maximum flow value
+        System.out.println("Maximum flow value of the network is " + fordFulkerson.getMaximumFlowValue());
     }
     private static String getFIleName(Scanner input){
         int userInput , fileNumber;
