@@ -1,20 +1,18 @@
-import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
+        //get file name
         String fileName = getFIleName(input);
-        System.out.println(fileName);
-
-        readData(fileName);
-
+        System.out.println();
+        System.out.println("File path : " + fileName);
+        //call the method to process the data
+        FileInputReader.processFileData(fileName);
     }
     private static String getFIleName(Scanner input){
         int userInput , fileNumber;
         String fileName;
-
+        //display the menu
         System.out.println("""
     
     1 : Bridge file
@@ -41,13 +39,15 @@ public class Main {
                         fileNumber = getFileNumber("ladder",20, input);
                         fileName = "benchmarks/ladder_" + fileNumber + ".txt";
                         return fileName;
+                    case 3 :
+                        //test file
                     default:
-                        System.out.println("Enter 1,2 to select file type or enter 0 to exit");
+                        System.out.println("Enter 1 or 2 to select file type or enter 0 to exit");
                         input.nextLine();
                 }
             }
             catch (Exception e){
-                System.out.println("Enter a number according to the file type");
+                System.out.println("Enter 1 or 2 to select file type or enter 0 to exit");
                 input.nextLine();
             }
         }
@@ -67,37 +67,9 @@ public class Main {
                 }
             }
             catch (Exception e){
-                System.out.println("Enter a number");
+                System.out.println("Enter a number for the file number");
                 input.nextLine();
             }
-        }
-    }
-    private static void readData(String filename) {
-        int fromVertex, toVertex, capacity, numberOfVertices;
-        try {
-            File file = new File(filename);
-            Scanner fileReader = new Scanner(file);
-
-            //read the number of vertices
-            numberOfVertices = Integer.parseInt(fileReader.nextLine().trim());
-            NetworkGraph networkGraph = new NetworkGraph(numberOfVertices);
-
-            //read the start vertex, end vertex and the edge capacity
-            while (fileReader.hasNextLine()) {
-                String[] connections = fileReader.nextLine().trim().split(" ");
-                for (int i = 0; i < connections.length; i += 3) {
-                    fromVertex = Integer.parseInt(connections[0]);
-                    toVertex = Integer.parseInt(connections[1]);
-                    capacity = Integer.parseInt(connections[2]);
-                    //create a new edge using the read data
-                    networkGraph.createNewEdge(fromVertex,toVertex,capacity);
-                }
-            }
-            //display the graph as adjacency list
-            networkGraph.displayAdjacencyList();
-        }
-        catch (IOException e) {
-            System.out.println("Can not find the file");
         }
     }
 }

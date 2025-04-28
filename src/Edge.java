@@ -1,8 +1,9 @@
 public class Edge {
-    private int fromVertex;
-    private int toVertex;
-    private int edgeCapacity;
+    private final int fromVertex;
+    private final int toVertex;
+    private final int edgeCapacity;
     private int currentEdgeFlow;
+    private Edge reverseEdge;
 
     public Edge(int fromVertex, int toVertex, int edgeCapacity){
         this.fromVertex = fromVertex;
@@ -16,36 +17,31 @@ public class Edge {
         return fromVertex;
     }
 
-    public void setFromVertex(int fromVertex) {
-        this.fromVertex = fromVertex;
-    }
-
     public int getToVertex() {
         return toVertex;
     }
 
-    public void setToVertex(int toVertex) {
-        this.toVertex = toVertex;
+    public void setReverseEdge(Edge reverseEdge) {
+        this.reverseEdge = reverseEdge;
     }
 
-    public int getEdgeCapacity() {
-        return edgeCapacity;
+    public boolean isReverseEdge(){
+        return edgeCapacity == 0;
     }
 
-    public void setEdgeCapacity(int edgeCapacity) {
-        this.edgeCapacity = edgeCapacity;
+    //update the flow value of the edge
+    public void addEdgeFlowValue(int bottleNeckValue){
+        currentEdgeFlow += bottleNeckValue;
+        reverseEdge.currentEdgeFlow -= bottleNeckValue;
     }
 
-    public int getCurrentEdgeFlow() {
-        return currentEdgeFlow;
-    }
-
-    public void setCurrentEdgeFlow(int currentEdgeFlow) {
-        this.currentEdgeFlow = currentEdgeFlow;
+    //calculate the remaining flow value of the edge
+    public int getRemainingEdgeCapacity(){
+        return this.edgeCapacity - this.currentEdgeFlow;
     }
 
     @Override
     public String toString(){
-        return " - " + toVertex;
+        return  " " + fromVertex + " - " + toVertex + " (" + edgeCapacity + ") ";
     }
 }
