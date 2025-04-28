@@ -17,6 +17,7 @@ public class Main {
     
     1 : Bridge file
     2 : Ladder file
+    3 : Custom file path
     0 : Exit
     """);
         while (true){
@@ -40,18 +41,28 @@ public class Main {
                         fileName = "benchmarks/ladder_" + fileNumber + ".txt";
                         return fileName;
                     case 3 :
-                        //test file
+                        //custom file path
+                        fileName = getCustomFile(input);
+                        return fileName;
                     default:
-                        System.out.println("Enter 1 or 2 to select file type or enter 0 to exit");
+                        System.out.println("Enter 1,2 or 3 to select file type or enter 0 to exit");
                         input.nextLine();
                 }
             }
             catch (Exception e){
-                System.out.println("Enter 1 or 2 to select file type or enter 0 to exit");
+                System.out.println("Enter 1,2 or 3 to select file type or enter 0 to exit");
                 input.nextLine();
             }
         }
     }
+
+    private static String getCustomFile(Scanner input){
+        String userInput;
+        System.out.print("Enter your file path : ");
+        userInput = input.next().trim();
+        return userInput;
+    }
+
     private static int getFileNumber(String fileName, int endNumber, Scanner input){
         int userInput;
         while (true){
