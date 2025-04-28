@@ -26,17 +26,17 @@ public class Main {
                 userInput = input.nextInt();
                 switch (userInput){
                     case 0:
-                        // exit from the program
+                        //exit from the program
                         System.out.println("Exited");
                         System.exit(0);
                         break;
                     case 1:
-                        // bridge files
+                        //bridge files
                         fileNumber = getFileNumber("bride", 19, input);
                         fileName = "benchmarks/bridge_" + fileNumber + ".txt";
                         return fileName;
                     case 2:
-                        // ladder files
+                        //ladder files
                         fileNumber = getFileNumber("ladder",20, input);
                         fileName = "benchmarks/ladder_" + fileNumber + ".txt";
                         return fileName;
