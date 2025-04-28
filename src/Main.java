@@ -2,16 +2,21 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        //get file name
-        String fileName = getFIleName(input);
-        System.out.println();
-        System.out.println("File path : " + fileName);
+        try {
+            //get file name
+            String fileName = getFIleName(input);
+            System.out.println();
+            System.out.println("File path : " + fileName);
 
-        NetworkGraph networkGraph = FileInputReader.processFileData(fileName);
-        FordFulkerson fordFulkerson = new FordFulkerson(networkGraph);
+            NetworkGraph networkGraph = FileInputReader.processFileData(fileName);
+            FordFulkerson fordFulkerson = new FordFulkerson(networkGraph);
 
-        //display the maximum flow value
-        System.out.println("Maximum flow value of the network is " + fordFulkerson.getMaximumFlowValue());
+            //display the maximum flow value
+            System.out.println("Maximum flow value of the network is " + fordFulkerson.getMaximumFlowValue());
+        }
+        catch (Exception e){
+            System.out.println("Try again");
+        }
     }
     private static String getFIleName(Scanner input){
         int userInput , fileNumber;
